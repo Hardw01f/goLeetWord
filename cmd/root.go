@@ -17,13 +17,14 @@ package cmd
 
 import (
 	"fmt"
-	"log"
 	"os"
 
 	"github.com/spf13/cobra"
 
 	homedir "github.com/mitchellh/go-homedir"
 	"github.com/spf13/viper"
+
+	ep "github.com/Hardw01f/goLeetWord/pkg/errorprint"
 )
 
 var cfgFile string
@@ -54,7 +55,7 @@ to quickly create a Cobra application.`,
 
 		if len(args) != 1 {
 			err := fmt.Errorf("at least, goLeetWord needs a argument")
-			log.Fatal(err)
+			ep.ErrorMessage(err)
 		}
 		var leet []rune
 		str := args[0]
