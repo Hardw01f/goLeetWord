@@ -23,9 +23,20 @@ import (
 
 	homedir "github.com/mitchellh/go-homedir"
 	"github.com/spf13/viper"
+
+	ep "github.com/Hardw01f/goLeetWord/pkg/errorprint"
+	"github.com/Hardw01f/goLeetWord/pkg/leeter"
 )
 
 var cfgFile string
+
+type Flags struct {
+	version       bool
+	onlyLowercase bool
+	onlyUppercase bool
+}
+
+var flags Flags
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -40,34 +51,29 @@ to quickly create a Cobra application.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	Run: func(cmd *cobra.Command, args []string) {
+
+		if flags.version == true {
+			fmt.Println("goLeetWord -- v.0.0.1")
+			os.Exit(0)
+		}
+
 		if len(args) != 1 {
-			fmt.Println("arguments is only one")
-			os.Exit(1)
-		}
-		var leet []rune
-		str := args[0]
-
-		for _, c := range str {
-			switch c {
-			case 'a', 'A':
-				leet = append(leet, c-(c-'@'))
-			case 'e', 'E':
-				leet = append(leet, c-(c-'3'))
-			case 'l', 'L':
-				leet = append(leet, c-(c-'1'))
-			case 'i', 'I':
-				leet = append(leet, c-(c-'1'))
-			case 's', 'S':
-				leet = append(leet, c-(c-'5'))
-			case 't', 'T':
-				leet = append(leet, c-(c-'7'))
-			default:
-				leet = append(leet, c)
-			}
+			err := fmt.Errorf("at least, goLeetWord needs a argument")
+			ep.ErrorMessage(err)
 		}
 
-		fmt.Printf("[ %s ] --LEET(default)--> : ", str)
-		fmt.Println(string(leet))
+		if flags.onlyLowercase == true {
+			leeter.LowerLeeter(args)
+			os.Exit(0)
+		}
+
+		if flags.onlyUppercase == true {
+			leeter.UpperLeeter(args)
+			os.Exit(0)
+		}
+
+		leeter.DefaultLeeter(args)
+
 	},
 }
 
@@ -91,7 +97,10 @@ func init() {
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+
+	rootCmd.Flags().BoolVarP(&flags.version, "version", "v", false, "print goLeetWord version")
+	rootCmd.Flags().BoolVar(&flags.onlyLowercase, "onlylower", false, "inputed word convert Leetword only Lowercase (default: Both of Upper and Lower convert)")
+	rootCmd.Flags().BoolVar(&flags.onlyUppercase, "onlyupper", false, "inputed word convert Leetword only Uppercase (default: Both of Upper and Lower convert)")
 }
 
 // initConfig reads in config file and ENV variables if set.
