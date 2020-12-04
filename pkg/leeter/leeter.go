@@ -6,7 +6,7 @@ import (
 
 var leet []rune
 
-func DefaultLeeter(args []string) {
+func DefaultLeeter(args []string) (string, error) {
 
 	str := args[0]
 
@@ -31,11 +31,11 @@ func DefaultLeeter(args []string) {
 		}
 	}
 
-	fmt.Printf("[ %s ] --LEET(default)--> : ", str)
-	fmt.Println(string(leet))
+	res := fmt.Sprintf("[ %s ] --LEET(default)--> : %s\n", str, string(leet))
+	return res, nil
 }
 
-func LowerLeeter(args []string) {
+func LowerLeeter(args []string) (string, error) {
 
 	str := args[0]
 
@@ -60,11 +60,12 @@ func LowerLeeter(args []string) {
 		}
 	}
 
-	fmt.Printf("[ %s ] --LEET(Only Lowercase)--> : ", str)
-	fmt.Println(string(leet))
+	res := fmt.Sprintf("[ %s ] --LEET(Only Lowercase)--> : %s\n", str, string(leet))
+	return res, nil
+
 }
 
-func UpperLeeter(args []string) {
+func UpperLeeter(args []string) (string, error) {
 
 	str := args[0]
 
@@ -89,6 +90,6 @@ func UpperLeeter(args []string) {
 		}
 	}
 
-	fmt.Printf("[ %s ] --LEET(Only Uppercase)--> : ", str)
-	fmt.Println(string(leet))
+	res := fmt.Sprintf("[ %s ] --LEET(Only Uppercase)--> : %s\n", str, string(leet))
+	return res, nil
 }

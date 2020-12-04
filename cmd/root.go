@@ -38,6 +38,8 @@ type Flags struct {
 
 var flags Flags
 
+var leetStr string
+
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "goLeetWord",
@@ -52,27 +54,40 @@ to quickly create a Cobra application.`,
 	// has an action associated with it:
 	Run: func(cmd *cobra.Command, args []string) {
 
+		var err error
+
 		if flags.version == true {
 			fmt.Println("goLeetWord -- v.0.0.1")
 			os.Exit(0)
 		}
 
 		if len(args) != 1 {
-			err := fmt.Errorf("at least, goLeetWord needs a argument")
+			err = fmt.Errorf("at least, goLeetWord needs a argument")
 			ep.ErrorMessage(err)
 		}
 
 		if flags.onlyLowercase == true {
-			leeter.LowerLeeter(args)
-			os.Exit(0)
+			leetStr, err = leeter.LowerLeeter(args)
+			if err != nil {
+				ep.ErrorMessage(err)
+			}
 		}
 
 		if flags.onlyUppercase == true {
-			leeter.UpperLeeter(args)
-			os.Exit(0)
+			leetStr, err = leeter.UpperLeeter(args)
+			if err != nil {
+				ep.ErrorMessage(err)
+			}
 		}
 
-		leeter.DefaultLeeter(args)
+		if flags.onlyLowercase == false && flags.onlyUppercase == false {
+			leetStr, err = leeter.DefaultLeeter(args)
+			if err != nil {
+				ep.ErrorMessage(err)
+			}
+		}
+
+		fmt.Println(leetStr)
 
 	},
 }
