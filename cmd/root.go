@@ -25,6 +25,7 @@ import (
 	"github.com/spf13/viper"
 
 	ep "github.com/Hardw01f/goLeetWord/pkg/errorprint"
+	"github.com/Hardw01f/goLeetWord/pkg/leeter"
 )
 
 var cfgFile string
@@ -57,30 +58,9 @@ to quickly create a Cobra application.`,
 			err := fmt.Errorf("at least, goLeetWord needs a argument")
 			ep.ErrorMessage(err)
 		}
-		var leet []rune
-		str := args[0]
 
-		for _, c := range str {
-			switch c {
-			case 'a', 'A':
-				leet = append(leet, c-(c-'@'))
-			case 'e', 'E':
-				leet = append(leet, c-(c-'3'))
-			case 'l', 'L':
-				leet = append(leet, c-(c-'1'))
-			case 'i', 'I':
-				leet = append(leet, c-(c-'1'))
-			case 's', 'S':
-				leet = append(leet, c-(c-'5'))
-			case 't', 'T':
-				leet = append(leet, c-(c-'7'))
-			default:
-				leet = append(leet, c)
-			}
-		}
+		leeter.DefaultLeeter(args)
 
-		fmt.Printf("[ %s ] --LEET(default)--> : ", str)
-		fmt.Println(string(leet))
 	},
 }
 
