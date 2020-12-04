@@ -17,6 +17,7 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -26,6 +27,12 @@ import (
 )
 
 var cfgFile string
+
+type Flags struct {
+	version bool
+}
+
+var flags Flags
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -40,9 +47,14 @@ to quickly create a Cobra application.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	Run: func(cmd *cobra.Command, args []string) {
+		if flags.version == true {
+			fmt.Println("goLeetWord -- v.0.0.1")
+			os.Exit(0)
+		}
+
 		if len(args) != 1 {
-			fmt.Println("arguments is only one")
-			os.Exit(1)
+			err := fmt.Errorf("at least, goLeetWord needs a argument")
+			log.Fatal(err)
 		}
 		var leet []rune
 		str := args[0]
@@ -91,7 +103,8 @@ func init() {
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+
+	rootCmd.Flags().BoolVarP(&flags.version, "version", "v", false, "print goLeetWord version")
 }
 
 // initConfig reads in config file and ENV variables if set.
