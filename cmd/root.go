@@ -31,7 +31,9 @@ import (
 var cfgFile string
 
 type Flags struct {
-	version bool
+	version       bool
+	onlyLowercase bool
+	onlyUppercase bool
 }
 
 var flags Flags
@@ -49,6 +51,7 @@ to quickly create a Cobra application.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	Run: func(cmd *cobra.Command, args []string) {
+
 		if flags.version == true {
 			fmt.Println("goLeetWord -- v.0.0.1")
 			os.Exit(0)
@@ -57,6 +60,16 @@ to quickly create a Cobra application.`,
 		if len(args) != 1 {
 			err := fmt.Errorf("at least, goLeetWord needs a argument")
 			ep.ErrorMessage(err)
+		}
+
+		if flags.onlyLowercase == true {
+			leeter.LowerLeeter(args)
+			os.Exit(0)
+		}
+
+		if flags.onlyUppercase == true {
+			leeter.UpperLeeter(args)
+			os.Exit(0)
 		}
 
 		leeter.DefaultLeeter(args)
@@ -86,6 +99,8 @@ func init() {
 	// when this action is called directly.
 
 	rootCmd.Flags().BoolVarP(&flags.version, "version", "v", false, "print goLeetWord version")
+	rootCmd.Flags().BoolVar(&flags.onlyLowercase, "onlylower", false, "inputed word convert Leetword only Lowercase (default: Both of Upper and Lower convert)")
+	rootCmd.Flags().BoolVar(&flags.onlyUppercase, "onlyupper", false, "inputed word convert Leetword only Uppercase (default: Both of Upper and Lower convert)")
 }
 
 // initConfig reads in config file and ENV variables if set.
