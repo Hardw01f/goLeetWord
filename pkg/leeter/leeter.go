@@ -1,9 +1,5 @@
 package leeter
 
-import (
-	"fmt"
-)
-
 var leet []rune
 
 func DefaultLeeter(args []string) (string, error) {
@@ -31,8 +27,7 @@ func DefaultLeeter(args []string) (string, error) {
 		}
 	}
 
-	res := fmt.Sprintf("[ %s ] --LEET(default)--> : %s\n", str, string(leet))
-	return res, nil
+	return string(leet), nil
 }
 
 func LowerLeeter(args []string) (string, error) {
@@ -60,8 +55,7 @@ func LowerLeeter(args []string) (string, error) {
 		}
 	}
 
-	res := fmt.Sprintf("[ %s ] --LEET(Only Lowercase)--> : %s\n", str, string(leet))
-	return res, nil
+	return string(leet), nil
 
 }
 
@@ -90,6 +84,5 @@ func UpperLeeter(args []string) (string, error) {
 		}
 	}
 
-	res := fmt.Sprintf("[ %s ] --LEET(Only Uppercase)--> : %s\n", str, string(leet))
-	return res, nil
+	return string(leet), nil
 }

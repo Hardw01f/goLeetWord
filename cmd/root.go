@@ -71,6 +71,7 @@ to quickly create a Cobra application.`,
 			if err != nil {
 				ep.ErrorMessage(err)
 			}
+			OutputResult(args[0], leetStr, "Only Lowercase")
 		}
 
 		if flags.onlyUppercase == true {
@@ -78,6 +79,7 @@ to quickly create a Cobra application.`,
 			if err != nil {
 				ep.ErrorMessage(err)
 			}
+			OutputResult(args[0], leetStr, "Only Uppercase")
 		}
 
 		if flags.onlyLowercase == false && flags.onlyUppercase == false {
@@ -85,9 +87,8 @@ to quickly create a Cobra application.`,
 			if err != nil {
 				ep.ErrorMessage(err)
 			}
+			OutputResult(args[0], leetStr, "Default")
 		}
-
-		fmt.Println(leetStr)
 
 	},
 }
@@ -142,4 +143,10 @@ func initConfig() {
 	if err := viper.ReadInConfig(); err == nil {
 		fmt.Println("Using config file:", viper.ConfigFileUsed())
 	}
+
+}
+
+func OutputResult(originWord, result, resultType string) {
+	mes := fmt.Sprintf("[ %s ] --Leet(%s)--> : %s\n", originWord, resultType, result)
+	fmt.Println(mes)
 }
