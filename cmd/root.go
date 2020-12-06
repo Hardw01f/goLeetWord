@@ -66,28 +66,30 @@ to quickly create a Cobra application.`,
 			ep.ErrorMessage(err)
 		}
 
+		originWord := args[0]
+
 		if flags.onlyLowercase == true {
-			leetStr, err = leeter.LowerLeeter(args)
+			leetStr, err = leeter.LowerLeeter(originWord)
 			if err != nil {
 				ep.ErrorMessage(err)
 			}
-			OutputResult(args[0], leetStr, "Only Lowercase")
+			OutputResult(originWord, leetStr, "Only Lowercase")
 		}
 
 		if flags.onlyUppercase == true {
-			leetStr, err = leeter.UpperLeeter(args)
+			leetStr, err = leeter.UpperLeeter(originWord)
 			if err != nil {
 				ep.ErrorMessage(err)
 			}
-			OutputResult(args[0], leetStr, "Only Uppercase")
+			OutputResult(originWord, leetStr, "Only Uppercase")
 		}
 
 		if flags.onlyLowercase == false && flags.onlyUppercase == false {
-			leetStr, err = leeter.DefaultLeeter(args)
+			leetStr, err = leeter.DefaultLeeter(originWord)
 			if err != nil {
 				ep.ErrorMessage(err)
 			}
-			OutputResult(args[0], leetStr, "Default")
+			OutputResult(originWord, leetStr, "Default")
 		}
 
 	},
