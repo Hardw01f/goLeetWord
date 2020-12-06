@@ -1,10 +1,8 @@
 package leeter
 
-var leet []rune
+func DefaultLeeter(str string) (string, error) {
 
-func DefaultLeeter(args []string) (string, error) {
-
-	str := args[0]
+	var leet []rune
 
 	for _, c := range str {
 		switch c {
@@ -30,9 +28,9 @@ func DefaultLeeter(args []string) (string, error) {
 	return string(leet), nil
 }
 
-func LowerLeeter(args []string) (string, error) {
+func LowerLeeter(str string) (string, error) {
 
-	str := args[0]
+	var leet []rune
 
 	for _, c := range str {
 		switch c {
@@ -59,9 +57,9 @@ func LowerLeeter(args []string) (string, error) {
 
 }
 
-func UpperLeeter(args []string) (string, error) {
+func UpperLeeter(str string) (string, error) {
 
-	str := args[0]
+	var leet []rune
 
 	for _, c := range str {
 		switch c {
