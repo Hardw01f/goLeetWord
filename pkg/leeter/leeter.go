@@ -1,14 +1,8 @@
 package leeter
 
-import (
-	"fmt"
-)
+func DefaultLeeter(str string) (string, error) {
 
-var leet []rune
-
-func DefaultLeeter(args []string) {
-
-	str := args[0]
+	var leet []rune
 
 	for _, c := range str {
 		switch c {
@@ -31,13 +25,12 @@ func DefaultLeeter(args []string) {
 		}
 	}
 
-	fmt.Printf("[ %s ] --LEET(default)--> : ", str)
-	fmt.Println(string(leet))
+	return string(leet), nil
 }
 
-func LowerLeeter(args []string) {
+func LowerLeeter(str string) (string, error) {
 
-	str := args[0]
+	var leet []rune
 
 	for _, c := range str {
 		switch c {
@@ -60,13 +53,13 @@ func LowerLeeter(args []string) {
 		}
 	}
 
-	fmt.Printf("[ %s ] --LEET(Only Lowercase)--> : ", str)
-	fmt.Println(string(leet))
+	return string(leet), nil
+
 }
 
-func UpperLeeter(args []string) {
+func UpperLeeter(str string) (string, error) {
 
-	str := args[0]
+	var leet []rune
 
 	for _, c := range str {
 		switch c {
@@ -89,6 +82,5 @@ func UpperLeeter(args []string) {
 		}
 	}
 
-	fmt.Printf("[ %s ] --LEET(Only Uppercase)--> : ", str)
-	fmt.Println(string(leet))
+	return string(leet), nil
 }
